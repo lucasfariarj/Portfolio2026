@@ -1,20 +1,25 @@
-import { experiences } from "@/data/content";
+"use client";
+
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Experience() {
+  const { t } = useLanguage();
+  const { experience } = t;
+
   return (
     <section id="experiencia" className="py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center">
           <p className="font-mono-label mb-3 text-xs font-medium uppercase tracking-[0.2em] text-accent">
-            Carreira
+            {experience.eyebrow}
           </p>
           <h2 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
-            Experiência Profissional
+            {experience.heading}
           </h2>
         </div>
 
         <div className="relative mt-16 space-y-10 border-l border-border pl-8">
-          {experiences.map((exp) => (
+          {experience.items.map((exp) => (
             <div key={exp.role + exp.company} className="relative">
               <span className="absolute -left-[2.35rem] top-1.5 h-3 w-3 rounded-full bg-accent ring-4 ring-accent-soft" />
 

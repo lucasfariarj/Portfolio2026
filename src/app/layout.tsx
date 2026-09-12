@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Baloo_2, Inter, JetBrains_Mono } from "next/font/google";
+import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 
 const baloo = Baloo_2({
@@ -35,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${baloo.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

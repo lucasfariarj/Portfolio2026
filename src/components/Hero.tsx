@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { roles, stats } from "@/data/content";
+import { useLanguage } from "@/context/LanguageContext";
 
 function useTypewriter(words: string[]) {
   const [text, setText] = useState("");
@@ -38,8 +38,19 @@ function useTypewriter(words: string[]) {
   return text;
 }
 
+function TypewriterRoles({ words }: { words: string[] }) {
+  const typed = useTypewriter(words);
+
+  return (
+    <p className="mt-6 h-10 text-2xl text-muted sm:text-3xl">
+      {typed}
+      <span className="animate-caret text-accent">|</span>
+    </p>
+  );
+}
+
 export default function Hero() {
-  const typed = useTypewriter(roles);
+  const { locale, t } = useLanguage();
 
   return (
     <section id="top" className="relative overflow-hidden pt-40 pb-20 md:pt-48">
@@ -47,7 +58,7 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-6xl px-6">
         <p className="font-mono-label mb-6 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-accent">
-          <span aria-hidden>👋</span> Olá, me chamo
+          <span aria-hidden>👋</span> {t.hero.greeting}
         </p>
 
         <h1 className="font-heading text-6xl font-extrabold leading-[1.05] text-foreground sm:text-7xl md:text-8xl">
@@ -56,32 +67,29 @@ export default function Hero() {
           <span className="text-accent">Faria 🦡</span>
         </h1>
 
-        <p className="mt-6 h-10 text-2xl text-muted sm:text-3xl">
-          {typed}
-          <span className="animate-caret text-accent">|</span>
-        </p>
+        <TypewriterRoles key={locale} words={t.hero.roles} />
 
         <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-          Transformo ideias em aplicações web completas, unindo interfaces modernas, back-ends bem estruturados e código pensado para evoluir.
+          {t.hero.description}
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
-          <a
+          {/* <a
             href="#projetos"
             className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-dim"
           >
-            Ver projetos →
-          </a>
+            {t.hero.ctaPrimary}
+          </a> */}
           <a
             href="#contato"
             className="rounded-lg border border-border-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-white/5"
           >
-            Entre em contato
+            {t.hero.ctaSecondary}
           </a>
         </div>
 
         <div className="mt-20 grid grid-cols-3 gap-8 border-t border-border pt-10">
-          {stats.map((stat) => (
+          {t.stats.map((stat) => (
             <div key={stat.label}>
               <p className="font-heading text-3xl font-extrabold text-foreground sm:text-4xl">
                 {stat.value}

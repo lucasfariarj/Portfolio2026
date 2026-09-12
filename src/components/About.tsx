@@ -1,6 +1,11 @@
-import { about } from "@/data/content";
+"use client";
+
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function About() {
+  const { t } = useLanguage();
+  const { about } = t;
+
   return (
     <section id="sobre" className="py-24 md:py-32">
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-6 md:grid-cols-2">
@@ -39,11 +44,11 @@ export default function About() {
           <div className="absolute -bottom-6 left-6 flex items-center gap-3 rounded-xl border border-border bg-bg-card px-5 py-3 shadow-xl shadow-black/40">
             <div>
               <p className="font-mono-label text-[10px] uppercase tracking-[0.15em] text-accent">
-                Status
+                {about.statusEyebrow}
               </p>
               <p className="mt-1 flex items-center gap-2 text-sm font-medium text-foreground">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                Disponível para projetos
+                {about.status}
               </p>
             </div>
           </div>
@@ -51,12 +56,12 @@ export default function About() {
 
         <div className="mt-6 md:mt-0">
           <p className="font-mono-label mb-3 text-xs font-medium uppercase tracking-[0.2em] text-accent">
-            Sobre mim
+            {about.eyebrow}
           </p>
           <span className="mb-6 block h-0.5 w-10 bg-accent" />
 
           <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-            Do front ao back, <span className="text-accent">construindo para a web</span>
+            {about.heading} <span className="text-accent">{about.headingHighlight}</span>
           </h2>
 
           <div className="mt-6 space-y-4 text-muted">
@@ -83,7 +88,7 @@ export default function About() {
             target="_blank"
             className="mt-8 inline-flex items-center gap-2 rounded-lg border border-border-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-white/5"
           >
-            → Baixar currículo
+            {about.downloadCv}
           </a>
         </div>
       </div>

@@ -1,33 +1,36 @@
-import { projects } from "@/data/content";
+"use client";
+
+import { useLanguage } from "@/context/LanguageContext";
 import ProjectMockup from "./ProjectMockup";
 
 export default function Projects() {
+  const { t } = useLanguage();
+  const { projects } = t;
+
   return (
     <section id="projetos" className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center">
           <p className="font-mono-label mb-3 text-xs font-medium uppercase tracking-[0.2em] text-accent">
-            Portfólio
+            {projects.eyebrow}
           </p>
           <h2 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
-            Projetos em Destaque
+            {projects.heading}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted">
-            Seleção dos projetos mais relevantes — do conceito ao deploy.
-          </p>
+          <p className="mx-auto mt-4 max-w-xl text-muted">{projects.description}</p>
         </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
+          {projects.items.map((project) => (
             <article
               key={project.title}
               className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-bg-card transition-colors hover:border-border-strong"
             >
               <div className="relative h-44 overflow-hidden">
-                <ProjectMockup kind={project.mockup as "analytics" | "ecommerce" | "ai"} />
+                <ProjectMockup kind={project.mockup} />
                 {project.featured && (
                   <span className="font-mono-label absolute right-3 top-3 rounded-md bg-accent px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-                    Destaque
+                    {projects.featuredLabel}
                   </span>
                 )}
               </div>
@@ -59,13 +62,13 @@ export default function Projects() {
                     href="#"
                     className="flex-1 rounded-lg border border-border-strong py-2.5 text-center text-sm font-medium text-foreground transition-colors hover:bg-white/5"
                   >
-                    GitHub
+                    {projects.githubLabel}
                   </a>
                   <a
                     href="#"
                     className="flex-1 rounded-lg bg-accent py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-accent-dim"
                   >
-                    Demo ↗
+                    {projects.demoLabel}
                   </a>
                 </div>
               </div>
