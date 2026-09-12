@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Baloo_2, Inter, JetBrains_Mono } from "next/font/google";
 import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
@@ -21,9 +21,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lucas Faria — Full Stack Developer",
+  title: "Lucas Faria - Full Stack Developer",
   description:
     "Portfolio de Lucas Faria, desenvolvedor full stack: React, Angular, Next.js, PHP, MySQL, Laravel",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0f",
 };
 
 export default function RootLayout({
