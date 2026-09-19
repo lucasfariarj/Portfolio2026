@@ -71,6 +71,14 @@ section[id] {
   scroll-margin-top: 88px;
 }
 
+.spotlight {
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 20%),
+    rgba(139, 92, 246, 0.16),
+    transparent 60%
+  );
+}
+
 @keyframes blink-caret {
   0%,
   100% {

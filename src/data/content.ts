@@ -128,7 +128,7 @@ export const translations: Record<Locale, LocaleContent> = {
         "PostgreSQL & MySQL",
       ],
       description:
-        "Transformo ideias em aplicações web completas, unindo interfaces modernas, back-ends bem estruturados e código pensado para evoluir.",
+        "Focado em transformar problemas reais em aplicações web funcionais, conectando interfaces, back-end, APIs e dados em soluções bem estruturadas e fáceis de evoluir.",
       ctaPrimary: "Ver projetos →",
       ctaSecondary: "Entre em contato",
     },
@@ -289,7 +289,7 @@ export const translations: Record<Locale, LocaleContent> = {
         "PostgreSQL & MySQL",
       ],
       description:
-        "I turn ideas into complete web applications, combining modern interfaces, well-structured back-ends, and code built to evolve.",
+        "Focused on turning real problems into functional web applications, connecting interfaces, back-end, APIs, and data into well-structured solutions that are easy to evolve.",
       ctaPrimary: "View projects →",
       ctaSecondary: "Get in touch",
     },

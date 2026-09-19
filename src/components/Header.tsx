@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { locales, localeLabels, type Locale } from "@/data/content";
 import { useLanguage } from "@/context/LanguageContext";
+import { useActiveSection } from "@/hooks/useActiveSection";
+
+const SECTION_IDS = ["sobre", "experiencia", "tecnologias", "contato"] as const;
 
 function LanguageSelect({ className = "" }: { className?: string }) {
   const { locale, setLocale, t } = useLanguage();
@@ -26,6 +29,7 @@ function LanguageSelect({ className = "" }: { className?: string }) {
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { t } = useLanguage();
+  const activeSection = useActiveSection(SECTION_IDS);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-white/[0.06] bg-bg/80 backdrop-blur-md">
@@ -35,15 +39,20 @@ export default function Header() {
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {t.nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-sm text-muted transition-colors hover:text-foreground"
-            >
-              {item.label}
-            </a>
-          ))}
+          {t.nav.map((item) => {
+            const isActive = item.href === `#${activeSection}`;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`text-sm transition-colors hover:text-foreground ${
+                  isActive ? "text-accent" : "text-muted"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -77,16 +86,21 @@ export default function Header() {
 
       {open && (
         <nav className="flex flex-col gap-1 border-t border-border px-6 pb-6 pt-2 md:hidden">
-          {t.nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="rounded-md px-2 py-2.5 text-sm text-muted hover:bg-white/5 hover:text-foreground"
-            >
-              {item.label}
-            </a>
-          ))}
+          {t.nav.map((item) => {
+            const isActive = item.href === `#${activeSection}`;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={`rounded-md px-2 py-2.5 text-sm hover:bg-white/5 hover:text-foreground ${
+                  isActive ? "text-accent" : "text-muted"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
           <a
             href="#contato"
             onClick={() => setOpen(false)}

@@ -1,6 +1,8 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useLanguage } from "@/context/LanguageContext";
+import { fadeUp, scaleIn, staggerContainer, viewport } from "@/lib/motion";
 import ProjectMockup from "./ProjectMockup";
 
 export default function Projects() {
@@ -10,7 +12,13 @@ export default function Projects() {
   return (
     <section id="projetos" className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
           <p className="font-mono-label mb-3 text-xs font-medium uppercase tracking-[0.2em] text-accent">
             {projects.eyebrow}
           </p>
@@ -18,12 +26,21 @@ export default function Projects() {
             {projects.heading}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted">{projects.description}</p>
-        </div>
+        </motion.div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          variants={staggerContainer(0.12)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
           {projects.items.map((project) => (
-            <article
+            <motion.article
               key={project.title}
+              variants={scaleIn}
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
               className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-bg-card transition-colors hover:border-border-strong"
             >
               <div className="relative h-44 overflow-hidden">
@@ -72,9 +89,9 @@ export default function Projects() {
                   </a>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

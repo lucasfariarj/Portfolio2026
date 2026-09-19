@@ -1,6 +1,8 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useLanguage } from "@/context/LanguageContext";
+import { fadeUp, scaleIn, staggerContainer, viewport } from "@/lib/motion";
 
 export default function TechStack() {
   const { t } = useLanguage();
@@ -9,19 +11,34 @@ export default function TechStack() {
   return (
     <section id="tecnologias" className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
           <p className="font-mono-label mb-3 text-xs font-medium uppercase tracking-[0.2em] text-accent">
+            <span className="text-muted-dim">03 / </span>
             {techStack.eyebrow}
           </p>
           <h2 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
             {techStack.heading}
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
           {techStack.groups.map((group) => (
-            <div
+            <motion.div
               key={group.category}
+              variants={scaleIn}
+              whileHover={{ y: -4 }}
               className="rounded-2xl border border-border bg-bg-card p-6"
             >
               <p className="font-mono-label mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-accent">
@@ -37,11 +54,17 @@ export default function TechStack() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-6 rounded-2xl border border-border bg-bg-elevated/60 px-6 py-8 text-center">
+        <motion.div
+          className="mt-6 rounded-2xl border border-border bg-bg-elevated/60 px-6 py-8 text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
           <p className="font-mono-label mb-5 text-xs uppercase tracking-[0.2em] text-muted-dim">
             {techStack.alsoWorkedWithLabel}
           </p>
@@ -52,7 +75,7 @@ export default function TechStack() {
               </span>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,6 +1,8 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useLanguage } from "@/context/LanguageContext";
+import { fadeLeft, fadeRight, viewport } from "@/lib/motion";
 
 export default function About() {
   const { t } = useLanguage();
@@ -9,7 +11,13 @@ export default function About() {
   return (
     <section id="sobre" className="py-24 md:py-32">
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-6 md:grid-cols-2">
-        <div className="relative">
+        <motion.div
+          className="relative"
+          variants={fadeLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
           <div className="overflow-hidden rounded-2xl border border-border bg-bg-elevated shadow-2xl shadow-black/40">
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
@@ -41,7 +49,11 @@ export default function About() {
             </div>
           </div>
 
-          <div className="absolute -bottom-6 left-6 flex items-center gap-3 rounded-xl border border-border bg-bg-card px-5 py-3 shadow-xl shadow-black/40">
+          <motion.div
+            className="absolute -bottom-6 left-6 flex items-center gap-3 rounded-xl border border-border bg-bg-card px-5 py-3 shadow-xl shadow-black/40"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+          >
             <div>
               <p className="font-mono-label text-[10px] uppercase tracking-[0.15em] text-accent">
                 {about.statusEyebrow}
@@ -51,11 +63,18 @@ export default function About() {
                 {about.status}
               </p>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="mt-6 md:mt-0">
+        <motion.div
+          className="mt-6 md:mt-0"
+          variants={fadeRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
           <p className="font-mono-label mb-3 text-xs font-medium uppercase tracking-[0.2em] text-accent">
+            <span className="text-muted-dim">01 / </span>
             {about.eyebrow}
           </p>
           <span className="mb-6 block h-0.5 w-10 bg-accent" />
@@ -83,14 +102,16 @@ export default function About() {
             ))}
           </dl>
 
-          <a
+          <motion.a
             href="/curriculum.pdf"
             target="_blank"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
             className="mt-8 inline-flex items-center gap-2 rounded-lg border border-border-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-white/5"
           >
             {about.downloadCv}
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );
