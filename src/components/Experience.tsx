@@ -35,7 +35,7 @@ export default function Experience() {
           viewport={viewport}
         >
           {experience.items.map((exp) => (
-            <motion.div key={exp.role + exp.company} className="relative" variants={fadeUp}>
+            <motion.div key={exp.company} className="relative" variants={fadeUp}>
               <motion.span
                 className="absolute -left-[2.35rem] top-1.5 h-3 w-3 rounded-full bg-accent ring-4 ring-accent-soft"
                 initial={{ scale: 0 }}

@@ -1,30 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { locales, localeLabels, type Locale } from "@/data/content";
 import { useLanguage } from "@/context/LanguageContext";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const SECTION_IDS = ["sobre", "experiencia", "tecnologias", "contato"] as const;
-
-function LanguageSelect({ className = "" }: { className?: string }) {
-  const { locale, setLocale, t } = useLanguage();
-
-  return (
-    <select
-      value={locale}
-      onChange={(e) => setLocale(e.target.value as Locale)}
-      aria-label={t.header.languageLabel}
-      className={`cursor-pointer rounded-lg border border-border bg-bg-elevated px-3 py-2 text-sm font-medium text-foreground outline-none transition-colors hover:border-border-strong focus:border-accent ${className}`}
-    >
-      {locales.map((loc) => (
-        <option key={loc} value={loc} className="bg-bg-elevated text-foreground">
-          {localeLabels[loc]}
-        </option>
-      ))}
-    </select>
-  );
-}
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -56,7 +37,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <LanguageSelect />
+          <LanguageSwitcher />
           <a
             href="#contato"
             className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dim"
@@ -66,7 +47,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
-          <LanguageSelect className="py-1.5 text-xs" />
+          <LanguageSwitcher />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
