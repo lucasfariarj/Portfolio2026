@@ -139,8 +139,8 @@ export const translations: Record<Locale, LocaleContent> = {
     ],
     about: {
       eyebrow: "Sobre mim",
-      heading: "Do front ao back,",
-      headingHighlight: "construindo para a web",
+      heading: "Construindo aplicações web",
+      headingHighlight: "de ponta a ponta",
       paragraphs: [
         "Sou desenvolvedor Full Stack com 5 anos de experiência no desenvolvimento e manutenção de aplicações web. Comecei minha trajetória trabalhando com PHP e jQuery e, hoje, atuo principalmente com Next.js, React, TypeScript e MySQL.",
         "Gosto de participar de todo o processo de desenvolvimento, desde a construção das interfaces até regras de negócio, APIs e banco de dados, sempre buscando soluções simples, bem estruturadas e fáceis de manter.",
@@ -255,7 +255,7 @@ export const translations: Record<Locale, LocaleContent> = {
     },
     contact: {
       eyebrow: "Contato",
-      heading: "Vamos construir algo juntos?",
+      heading: "Meus Contatos",
       description:
         "Estou disponível para novos projetos e oportunidades. Me chame por qualquer um dos canais abaixo.",
       emailLabel: "Email",
@@ -300,8 +300,8 @@ export const translations: Record<Locale, LocaleContent> = {
     ],
     about: {
       eyebrow: "About me",
-      heading: "From front to back,",
-      headingHighlight: "building for the web",
+      heading: "Building web applications",
+      headingHighlight: "end to end",
       paragraphs: [
         "I'm a Full Stack developer with 5 years of experience building and maintaining web applications. I started out working with PHP and jQuery, and today I work mainly with Next.js, React, TypeScript, and MySQL.",
         "I enjoy being involved in the entire development process, from building interfaces to business rules, APIs, and databases, always aiming for solutions that are simple, well-structured, and easy to maintain.",
@@ -416,7 +416,7 @@ export const translations: Record<Locale, LocaleContent> = {
     },
     contact: {
       eyebrow: "Contact",
-      heading: "Let's build something together?",
+      heading: "My Contacts",
       description:
         "I'm available for new projects and opportunities. Reach out through any of the channels below.",
       emailLabel: "Email",
