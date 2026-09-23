@@ -5,8 +5,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import { fadeLeft, fadeRight, viewport } from "@/lib/motion";
 
 export default function About() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
   const { about } = t;
+  const resumeHref = locale === "en" ? "/curriculum_en.pdf" : "/curriculum.pdf";
 
   return (
     <section id="sobre" className="py-24 md:py-32">
@@ -103,7 +104,7 @@ export default function About() {
           </dl>
 
           <motion.a
-            href="/curriculum.pdf"
+            href={resumeHref}
             target="_blank"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
