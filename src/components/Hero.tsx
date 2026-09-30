@@ -2,8 +2,46 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { motion } from "motion/react";
+import { BlobMascot, useBlobMascot } from "blobmascot";
 import { useLanguage } from "@/context/LanguageContext";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+
+const BLOB_SIZE = 380;
+const BLOB_COLOR = "#8b5cf6";
+
+function BlobCompanion({ excited }: { excited: boolean }) {
+  const mascot = useBlobMascot({
+    shape: "droplet",
+    expression: "curious",
+    state: "idle",
+    color: BLOB_COLOR,
+    size: BLOB_SIZE,
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      mascot.setState("wink");
+    }, 7000);
+    return () => clearInterval(interval);
+  }, [mascot]);
+
+  useEffect(() => {
+    mascot.setExpression(excited ? "happy" : "curious");
+  }, [excited, mascot]);
+
+  return (
+    <motion.div
+      variants={fadeUp}
+      className="relative hidden items-center justify-center lg:flex"
+    >
+      <div
+        aria-hidden
+        className="absolute h-96 w-96 rounded-full bg-accent/10 blur-3xl"
+      />
+      <BlobMascot controller={mascot} size={BLOB_SIZE} />
+    </motion.div>
+  );
+}
 
 function useTypewriter(words: string[]) {
   const [text, setText] = useState("");
@@ -54,6 +92,7 @@ function TypewriterRoles({ words }: { words: string[] }) {
 export default function Hero() {
   const { locale, t } = useLanguage();
   const spotlightRef = useRef<HTMLDivElement>(null);
+  const [ctaHovered, setCtaHovered] = useState(false);
 
   function handleMouseMove(event: MouseEvent<HTMLElement>) {
     const el = spotlightRef.current;
@@ -79,68 +118,74 @@ export default function Hero() {
       />
 
       <motion.div
-        className="relative mx-auto max-w-6xl px-6"
+        className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-[1.15fr_0.85fr]"
         variants={staggerContainer(0.12)}
         initial="hidden"
         animate="visible"
       >
-        <motion.p
-          variants={fadeUp}
-          className="font-mono-label mb-6 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-accent"
-        >
-          <span aria-hidden>👋</span> {t.hero.greeting}
-        </motion.p>
-
-        <motion.h1
-          variants={fadeUp}
-          className="font-heading text-6xl font-extrabold leading-[1.05] text-foreground sm:text-7xl md:text-8xl"
-        >
-          Lucas
-          <br />
-          <span className="text-accent">Faria 🦡</span>
-        </motion.h1>
-
-        <motion.div variants={fadeUp}>
-          <TypewriterRoles key={locale} words={t.hero.roles} />
-        </motion.div>
-
-        <motion.p
-          variants={fadeUp}
-          className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
-        >
-          {t.hero.description}
-        </motion.p>
-
-        <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
-          {/* <a
-            href="#projetos"
-            className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-dim"
+        <div>
+          <motion.p
+            variants={fadeUp}
+            className="font-mono-label mb-6 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-accent"
           >
-            {t.hero.ctaPrimary}
-          </a> */}
-          <motion.a
-            href="#contato"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="rounded-lg border border-border-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-white/5"
-          >
-            {t.hero.ctaSecondary}
-          </motion.a>
-        </motion.div>
+            <span aria-hidden>👋</span> {t.hero.greeting}
+          </motion.p>
 
-        <motion.div
-          variants={fadeUp}
-          className="mt-20 grid grid-cols-3 gap-8 border-t border-border pt-10"
-        >
-          {t.stats.map((stat) => (
-            <div key={stat.label}>
-              <p className="font-heading text-3xl font-extrabold text-foreground sm:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-1 text-sm text-muted">{stat.label}</p>
-            </div>
-          ))}
-        </motion.div>
+          <motion.h1
+            variants={fadeUp}
+            className="font-heading text-6xl font-extrabold leading-[1.05] text-foreground sm:text-7xl md:text-8xl"
+          >
+            Lucas
+            <br />
+            <span className="text-accent">Faria</span>
+          </motion.h1>
+
+          <motion.div variants={fadeUp}>
+            <TypewriterRoles key={locale} words={t.hero.roles} />
+          </motion.div>
+
+          <motion.p
+            variants={fadeUp}
+            className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
+          >
+            {t.hero.description}
+          </motion.p>
+
+          <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
+            {/* <a
+              href="#projetos"
+              className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-dim"
+            >
+              {t.hero.ctaPrimary}
+            </a> */}
+            <motion.a
+              href="#contato"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              onHoverStart={() => setCtaHovered(true)}
+              onHoverEnd={() => setCtaHovered(false)}
+              className="rounded-lg border border-border-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-white/5"
+            >
+              {t.hero.ctaSecondary}
+            </motion.a>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="mt-20 grid grid-cols-3 gap-8 border-t border-border pt-10"
+          >
+            {t.stats.map((stat) => (
+              <div key={stat.label}>
+                <p className="font-heading text-3xl font-extrabold text-foreground sm:text-4xl">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-sm text-muted">{stat.label}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        <BlobCompanion excited={ctaHovered} />
       </motion.div>
     </section>
   );
